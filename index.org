@@ -39,8 +39,6 @@ where:
 - $C$, the expected **incremental** cash flows per period
 - $C_0$, the initial investment
 
-
-
 * NPV Desicion Rule
 <br>
 <br>
@@ -60,34 +58,9 @@ The discount rate is the rate required on other projects of similar risk.  You c
 
 -  It is incorrect to use the firm's cost of borrowing, for a couple reasons.  First the investment decision should be independent of the capital structure decision.  Also, by increasing borrowing, you increase your cost of equity capital [Modigliani and Miller, Proposition II](https://micfm.shinyapps.io/MM_propositions_mobile/). So debt only *appears* cheap.
 
-
-
-* 
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-#{{{
-sidebarLayout(
-    sidebarPanel(
-        inputPanel(
-            sliderInput("cf.npv", label = "Cash Flow Per Period", min = 1, max = 500, step = 10, value = 50),
-            sliderInput("periods.npv", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
-            sliderInput("initial.inv.npv", label = "Time 0 Investment", min = 1, max = 500, step = 1, value = 300),
-            sliderInput("rate", label = "Discount Rate per Period", min = 0, max = .3, step = .01, value = .05)
-        )
-    ),
-    mainPanel(
-        renderPlot({
-            cfs.npv <- c(-1 * (input$initial.inv.npv), rep(input$cf.npv, input$periods.npv))
-            npv.sol <- sum(cfs.npv / (1 + input$rate)^{1:length(cfs.npv)})
-            plot(0, ylim = c(0,1), xlim = c(0,1), type = "n", xaxt = "n", yaxt = "n", ylab = "", xlab = "")
-            text(x = 0.5, y = 0.5, labels = paste0("NPV = $", round(npv.sol * 100, 2)), cex = 4)
-        })
-    )
-)
-#}}}
-```
-
-
+#+begin_comment
+App 1 was here, think it calculated NPV
+#+end_comment
  
 
 * Internal Rate of Return (IRR)
@@ -99,7 +72,6 @@ $-C_0 + \frac{C_1}{(1+r_{IRR})^1} + \frac{C_2}{(1+r_{IRR})^2} + ... + \frac{C_n}
 
 Note while NPV will have a unique solution, IRR may have multiple solutions depending on the signs of the cash flows.  The interested reader can understand why by consulting the [Fundamental Theorem of Algebra](https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra), [Descartes' Rule of Signs](https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs), and [Sturm's Theorem](https://en.wikipedia.org/wiki/Sturm%27s_theorem).
 
- 
 
 * IRR Desicion Rule
 <br>
@@ -112,33 +84,13 @@ Note while NPV will have a unique solution, IRR may have multiple solutions depe
 <br>
 $IRR < \text{Discount Rate} \Rightarrow \text{Reject}$</center>
 
- 
+#+begin_comment
+App2 here
+#+end_comment
 
-
-* 
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-#{{{
-inputPanel(
-    sliderInput("cf.irr", label = "Cash Flow Per Period", min = 1, max = 500, step = 10, value = 50),
-    sliderInput("periods.irr", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
-    sliderInput("initial.inv.irr", label = "Time 0 Investment", min = 1, max = 500, step = 1, value = 300)
-)
-
-renderPlot({
-    source(file = 'https://raw.githubusercontent.com/FinancialMarkets/corpfin/master/irr.R')
-    cfs <- c(-1 * (input$initial.inv.irr), rep(input$cf.irr, input$periods.irr))
-    irr.sol <- irr(cfs)$IRR
-    plot(0, ylim = c(0,1), xlim = c(0,1), type = "n", xaxt = "n", yaxt = "n", ylab = "", xlab = "")
-    text(x = 0.5, y = 0.5, labels = paste("IRR = ", round(irr.sol * 100, 2), "%"), cex = 5)
-})
-#}}}
-```
-
-
+#+begin_comment
 <!-- use code from here to make a version of app which will read data from file:  http://stackoverflow.com/questions/29253481/data-specific-selectinput-choices-in-rmd-shiny/29255723#29255723 -->
-
- 
+#+end_comment
 
 * Choosing Between Projects
 
@@ -151,57 +103,11 @@ If a project has negative cash flows followed by all positive cash flows, then t
 -  However, if you must rank projects -- and projects are either mutually exclusive or cash flows are not conventional -- then use NPV.  NPV will generate the correct decision, though IRR may not.
 
  
-
-* 
+#+begin_comment
+App 3 here
 
 <!-- interactive app showing NVP for all discount rates and therefore IRR when crossing the x-axis -->
-
-```{r, echo = FALSE, message = FALSE}
-library(highcharter)
-
-inputPanel(
-    sliderInput("cfs1", label = "Cash Flow Per Period", min = 1, max = 45, step = 1, value = 30),
-    sliderInput("periods1", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
-    sliderInput("initial.inv1", label = "Time 0 Investment", min = 170, max = 500, step = 1, value = 300)
-)
-
-renderHighchart({
-
-    cfs.npv1 <- c(-1 * (input$initial.inv1), rep(input$cfs1, input$periods1))
-    discount.rates <- seq(0, .3, by = .001)
-
-    npv.sol <- 0
-    for (i in 1:length(discount.rates) ){
-        npv.sol[i] <- sum(cfs.npv1 / (1 + discount.rates[i])^{1:length(cfs.npv1)})        
-    }
-
-    source(file = 'https://raw.githubusercontent.com/FinancialMarkets/corpfin/master/irr.R')
-    irr.sol2 <- irr(cfs.npv1)$IRR
-    
-    chart.data <- data.frame(cbind(discount.rates, npv.sol))
-    names(chart.data) <- c("discount.rates", "npv.sol")
-    
-    # hchart(chart.data, "line", hcaes(x = discount.rates, y = npv.sol))
-h2 <- highchart() %>% 
-  hc_chart(type = "line") %>% 
-  hc_add_series(data = round(chart.data$npv.sol, 2), name = "NPV") %>% 
-  hc_xAxis(title = list(text = "Discount Rate"),
-           categories = chart.data$discount.rates,
-        plotLines = list(list(
-          value = seq_along(chart.data$discount.rates)[chart.data$discount.rates == round(irr.sol2, 2)], 
-          color = '#000fff',
-          width = 3,
-          zIndex = 4,
-          label = list(text = paste0("IRR = ", round(irr.sol2, 2)),
-                       style = list( color = '#000fff', fontWeight = 'bold'   )
-          ))))
-h2
-# plot(chart.data$npv.sol ~ chart.data$discount.rates, type = 'l')
-
-})
-
-
-```
+#+end_comment
 
 
 <!-- insert interactive app which shows differing ranked projects by npv and irr -->
