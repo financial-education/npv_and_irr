@@ -1,0 +1,441 @@
+#+title: NPV and IRR
+#+author: Matt Brigida, Ph.D.
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+* Businesses Make Binary Decisions
+
+<center>**Invest or Do Not Invest**</center>
+<br>
+<center>![](./binary.jpg)</center>
+<br>
+<center>**So we need binary decision rules.**</center>
+<br>
+<br>
+This presentation will provide an introduction to the two most important, Net Present Value (NPV) and Internal Rate of Return (IRR).
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* Maximize Shareholder Wealth
+
+Early in your study of corporate finance you should have learned the **Goal of Financial Management** above.  Clearly any decision rules we define must be consistent with this goal.
+
+-  NPV will be the change in the value of the firm's equity if the project is accepted.
+
+-  IRR will also generate accept decisions only if doing so increases the firm's equity.
+
+Thus accepting all projects which have NPV > 0 will maximize shareholder wealth.
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* Net Present Value (NPV)
+
+*Net Present Value* is the sum of the investment's expected cash inflows and outflows discounted back to their present value at a risk adjusted rate. 
+
+The NPV is defined by: 
+
+$NPV = -C_0 + \frac{C_1}{(1+r)^1} + \frac{C_2}{(1+r)^2} + ... + \frac{C_n}{(1+r)^n}$ 
+
+where: 
+
+- $r$, is the discount rate per period
+- $n$, the number of periods in the project's life
+- $C$, the expected **incremental** cash flows per period
+- $C_0$, the initial investment
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div>
+
+* NPV Desicion Rule
+<br>
+<br>
+<br>
+<br>
+<center>$NPV \geq \$0 \Rightarrow \text{Accept}$
+<br>
+<br>
+<br>
+$NPV < \$0 \Rightarrow \text{Reject}$</center>
+
+* The Discount Rate
+
+The discount rate is the rate required on other projects of similar risk.  You can think of it as an *opportunity cost*, because if the firm didn't use the funds for the project, then it could be paid as a dividend to shareholders.  Shareholders then can invest the money in a financial asset earning that assets required return.
+
+-  Often the project is as risky as a company's existing operations, in which case you use the company's weighted average cost of capital (WACC).
+
+-  It is incorrect to use the firm's cost of borrowing, for a couple reasons.  First the investment decision should be independent of the capital structure decision.  Also, by increasing borrowing, you increase your cost of equity capital [Modigliani and Miller, Proposition II](https://micfm.shinyapps.io/MM_propositions_mobile/). So debt only *appears* cheap.
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div>
+
+* 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#{{{
+sidebarLayout(
+    sidebarPanel(
+        inputPanel(
+            sliderInput("cf.npv", label = "Cash Flow Per Period", min = 1, max = 500, step = 10, value = 50),
+            sliderInput("periods.npv", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
+            sliderInput("initial.inv.npv", label = "Time 0 Investment", min = 1, max = 500, step = 1, value = 300),
+            sliderInput("rate", label = "Discount Rate per Period", min = 0, max = .3, step = .01, value = .05)
+        )
+    ),
+    mainPanel(
+        renderPlot({
+            cfs.npv <- c(-1 * (input$initial.inv.npv), rep(input$cf.npv, input$periods.npv))
+            npv.sol <- sum(cfs.npv / (1 + input$rate)^{1:length(cfs.npv)})
+            plot(0, ylim = c(0,1), xlim = c(0,1), type = "n", xaxt = "n", yaxt = "n", ylab = "", xlab = "")
+            text(x = 0.5, y = 0.5, labels = paste0("NPV = $", round(npv.sol * 100, 2)), cex = 4)
+        })
+    )
+)
+#}}}
+```
+
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* Internal Rate of Return (IRR)
+
+*Internal Rate of Return* is the discount rate ($r_{IRR}$) that makes the Net Present Value equal zero.  That is, we solve the following equation for the $IRR$, using an algorithm such as the [Newton-Raphson method](https://en.wikipedia.org/wiki/Newton%27s_method).
+<br>
+<br>
+$-C_0 + \frac{C_1}{(1+r_{IRR})^1} + \frac{C_2}{(1+r_{IRR})^2} + ... + \frac{C_n}{(1+r_{IRR})^n} = 0$ 
+
+Note while NPV will have a unique solution, IRR may have multiple solutions depending on the signs of the cash flows.  The interested reader can understand why by consulting the [Fundamental Theorem of Algebra](https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra), [Descartes' Rule of Signs](https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs), and [Sturm's Theorem](https://en.wikipedia.org/wiki/Sturm%27s_theorem).
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* IRR Desicion Rule
+<br>
+<br>
+<br>
+<br>
+<center>$IRR > \text{Discount Rate} \Rightarrow \text{Accept}$
+<br>
+<br>
+<br>
+$IRR < \text{Discount Rate} \Rightarrow \text{Reject}$</center>
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+
+* 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#{{{
+inputPanel(
+    sliderInput("cf.irr", label = "Cash Flow Per Period", min = 1, max = 500, step = 10, value = 50),
+    sliderInput("periods.irr", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
+    sliderInput("initial.inv.irr", label = "Time 0 Investment", min = 1, max = 500, step = 1, value = 300)
+)
+
+renderPlot({
+    source(file = 'https://raw.githubusercontent.com/FinancialMarkets/corpfin/master/irr.R')
+    cfs <- c(-1 * (input$initial.inv.irr), rep(input$cf.irr, input$periods.irr))
+    irr.sol <- irr(cfs)$IRR
+    plot(0, ylim = c(0,1), xlim = c(0,1), type = "n", xaxt = "n", yaxt = "n", ylab = "", xlab = "")
+    text(x = 0.5, y = 0.5, labels = paste("IRR = ", round(irr.sol * 100, 2), "%"), cex = 5)
+})
+#}}}
+```
+
+
+<!-- use code from here to make a version of app which will read data from file:  http://stackoverflow.com/questions/29253481/data-specific-selectinput-choices-in-rmd-shiny/29255723#29255723 -->
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* Choosing Between Projects
+
+When the accept/reject decision on one project does not affect another project, these projects are known as **independent**.  If accepting one project means you must reject another, then these projects are **mutually exclusive**. 
+
+If a project has negative cash flows followed by all positive cash flows, then the project's cash flows are known as **conventional**.
+
+-  If two projects are independent and have conventional cash flows, then NPV and IRR will lead to the same accept/reject decision, i.e. $NPV \iff IRR$.  This is shown on the app in the following slide.
+
+-  However, if you must rank projects -- and projects are either mutually exclusive or cash flows are not conventional -- then use NPV.  NPV will generate the correct decision, though IRR may not.
+
+<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+
+* 
+
+<!-- interactive app showing NVP for all discount rates and therefore IRR when crossing the x-axis -->
+
+```{r, echo = FALSE, message = FALSE}
+library(highcharter)
+
+inputPanel(
+    sliderInput("cfs1", label = "Cash Flow Per Period", min = 1, max = 45, step = 1, value = 30),
+    sliderInput("periods1", label = "Number of Periods", min = 1, max = 50, step = 1, value = 20),
+    sliderInput("initial.inv1", label = "Time 0 Investment", min = 170, max = 500, step = 1, value = 300)
+)
+
+renderHighchart({
+
+    cfs.npv1 <- c(-1 * (input$initial.inv1), rep(input$cfs1, input$periods1))
+    discount.rates <- seq(0, .3, by = .001)
+
+    npv.sol <- 0
+    for (i in 1:length(discount.rates) ){
+        npv.sol[i] <- sum(cfs.npv1 / (1 + discount.rates[i])^{1:length(cfs.npv1)})        
+    }
+
+    source(file = 'https://raw.githubusercontent.com/FinancialMarkets/corpfin/master/irr.R')
+    irr.sol2 <- irr(cfs.npv1)$IRR
+    
+    chart.data <- data.frame(cbind(discount.rates, npv.sol))
+    names(chart.data) <- c("discount.rates", "npv.sol")
+    
+    # hchart(chart.data, "line", hcaes(x = discount.rates, y = npv.sol))
+h2 <- highchart() %>% 
+  hc_chart(type = "line") %>% 
+  hc_add_series(data = round(chart.data$npv.sol, 2), name = "NPV") %>% 
+  hc_xAxis(title = list(text = "Discount Rate"),
+           categories = chart.data$discount.rates,
+        plotLines = list(list(
+          value = seq_along(chart.data$discount.rates)[chart.data$discount.rates == round(irr.sol2, 2)], 
+          color = '#000fff',
+          width = 3,
+          zIndex = 4,
+          label = list(text = paste0("IRR = ", round(irr.sol2, 2)),
+                       style = list( color = '#000fff', fontWeight = 'bold'   )
+          ))))
+h2
+# plot(chart.data$npv.sol ~ chart.data$discount.rates, type = 'l')
+
+})
+
+
+```
+
+
+<!-- insert interactive app which shows differing ranked projects by npv and irr -->
+
+
+
+*  Calculator
+
+#+BEGIN_EXPORT html
+
+<script>
+
+var calculate = function() {
+
+  var dividend_next_year = Number(document.getElementById("dividend").value);
+  var g = Number(document.getElementById("g").value);
+  var r = Number(document.getElementById("r").value);
+
+  var price = dividend_next_year / (r - g);
+  
+  document.getElementById("out_price").innerHTML = price.toFixed(2);
+
+}
+
+</script>
+
+<body class="all">
+  <h3>
+    Stock Price Calculator (Constant Gowth)
+  </h3>
+
+  <div class="row">
+
+    <div class="column">
+      <table style="width:100%">
+        <tr>
+          <th align="left">Dividend Next Year:</th>
+          <th><input id="dividend" value="5" style="width: 50px"></th>
+        </tr>
+        <tr>
+          <th align="left">Dividend Growth Rate:</th>
+          <th><input id="g" value="0.07" style="width: 50px"></th>
+        </tr>
+	<tr>
+	<th align="left">Discount Rate:</th>
+        <th><input id="r" value="0.1" style="width: 50px"></th>
+        </tr>
+      </table>
+      <button onclick="calculate()">
+        Calculate.
+      </button>
+    </div>
+
+    <div class="column">
+    <p><b>Stock Price: <span id="out_price"></span></b></p>
+    </div>
+
+  </div>
+  <br>
+  <br>
+  <br>
+</body>
+
+#+END_EXPORT
+
+#+begin_comment
+#+BEGIN_EXPORT html
+<style>
+.fiddle iframe {
+height: 300px //you can manually change this height
+}
+</style>
+
+<div class="fiddle">
+<script async src="https://jsfiddle.net/mbkr1/jnzv5de1/embed/result,js,html,css/dark/"></script>
+</div>
+#+END_EXPORT
+
+#+BEGIN_EXPORT html :eval no
+<iframe width="100%" height="300" src="https://jsfiddle.net/mbkr1/jnzv5de1/embedded/js,html,css,result/dark/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+#+END_EXPORT
+#+end_comment
+
+
+
+ 
+* Self-Quiz Questions
+
+
+#+begin_export html
+<script>
+var submitAnswer1 = function() {
+
+  var radios = document.getElementsByName('choice');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+   // alert('please select choice answer');
+document.getElementById("p1").innerHTML = "Choose your answer.";
+document.getElementById("p1").style.backgroundColor = "white";
+  } else if ( val == "Correct" ) {
+//    alert('Answer is correct !');
+document.getElementById("p1").innerHTML = "Correct!";
+document.getElementById("p1").style.backgroundColor = "#90EE90";
+  } else {
+//    alert('Answer is wrong');
+document.getElementById("p1").innerHTML = "Wrong";
+document.getElementById("p1").style.backgroundColor = "#ff6666";
+  }
+};
+</script>
+
+
+
+<p>1. A stock pays a constant annual dividend of $10.  Its discount rate is 10%.  What is the value of the stock today?</p>
+<form >
+<input type="radio" name="choice" value="Incorrect"> $23<br>
+<input type="radio" name="choice" value="Incorrect"> $63<br>
+<input type="radio" name="choice" value="Correct"> $100<br>
+<input type="radio" name="choice" value="Incorrect"> $1000
+</form>
+<button onclick="submitAnswer1()">Submit Answer</button>
+<span id="p1"></span>
+<br>
+#+end_export
+
+
+#+begin_export html
+<script>
+var submitAnswer2 = function() {
+
+  var radios = document.getElementsByName('choice2');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+   // alert('please select choice answer');
+document.getElementById("p2").innerHTML = "Choose your answer.";
+document.getElementById("p2").style.backgroundColor = "white";
+  } else if ( val == "Correct" ) {
+//    alert('Answer is correct !');
+document.getElementById("p2").innerHTML = "Correct!";
+document.getElementById("p2").style.backgroundColor = "#90EE90";
+  } else {
+//    alert('Answer is wrong');
+document.getElementById("p2").innerHTML = "Wrong";
+document.getElementById("p2").style.backgroundColor = "#ff6666";
+  }
+};
+</script>
+
+
+<br>
+<p>2. Assume McCauley Ski Inc. has a 12% ROA and 20% payout ratio.  What is the maximum rate the firm can grow using only internal financing?</p>
+<form >
+<input type="radio" name="choice2" value="Incorrect"> -4.51%<br>
+<input type="radio" name="choice2" value="Incorrect"> 0.00%<br>
+<input type="radio" name="choice2" value="Correct"> 2.46%<br>
+<input type="radio" name="choice2" value="Incorrect"> 12.55%
+</form>
+<button onclick="submitAnswer2()">Submit Answer</button>
+<span id="p2"></span>
+#+end_export
+
+#+begin_export html
+<script>
+var submitAnswer3 = function() {
+
+  var radios = document.getElementsByName('choice3');
+  var val= "";
+  for (var i = 0, length = radios.length; i < length; i++) {
+      if (radios[i].checked) {
+         val = radios[i].value; 
+         break;
+       }
+  }
+  
+  if (val == "" ) {
+   // alert('please select choice answer');
+document.getElementById("p3").innerHTML = "Choose your answer.";
+document.getElementById("p3").style.backgroundColor = "white";
+  } else if ( val == "Correct" ) {
+//    alert('Answer is correct !');
+document.getElementById("p3").innerHTML = "Correct!";
+document.getElementById("p3").style.backgroundColor = "#90EE90";
+  } else {
+//    alert('Answer is wrong');
+document.getElementById("p3").innerHTML = "Wrong";
+document.getElementById("p3").style.backgroundColor = "#ff6666";
+  }
+};
+</script>
+
+
+<br>
+<p>3.  If a firm increases its profit margin, its IGR and SGR _______.  </p>
+<form >
+<input type="radio" name="choice3" value="Correct"> Increase<br>
+<input type="radio" name="choice3" value="Incorrect"> Decrease<br>
+<input type="radio" name="choice3" value="Incorrect"> Are unchanged
+</form>
+<button onclick="submitAnswer3()">Submit Answer</button>
+<span id="p3"></span>
+#+end_export
+
+* [[https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests][Reading Ease Score]]
+
+#+BEGIN_SRC elisp :results output :exports results
+(print (writegood-reading-ease))
+#+END_SRC
+
+#+RESULTS:
+: 
+: "Flesch-Kincaid reading ease score: 77.93 Fairly easy (7th grade)"
+
+#+BEGIN_SRC elisp :results output :exports results
+(print (writegood-grade-level))
+#+END_SRC
+
+#+RESULTS:
+: 
+: "Flesch-Kincaid grade level score: 4.77"
+
