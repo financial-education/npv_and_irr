@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-04-19 Tue 20:48 -->
+<!-- 2022-04-19 Tue 21:08 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>NPV and IRR</title>
@@ -228,46 +228,40 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org760e4b1">1. Businesses Make Binary Decisions</a></li>
-<li><a href="#orgd90018b">2. Maximize Shareholder Wealth</a></li>
-<li><a href="#org754a8fd">3. Net Present Value (NPV)</a></li>
-<li><a href="#org01bc144">4. NPV Desicion Rule</a></li>
-<li><a href="#org4ae4be4">5. The Discount Rate</a></li>
-<li><a href="#org792bc1a">6. </a></li>
-<li><a href="#org590a044">7. Internal Rate of Return (IRR)</a></li>
-<li><a href="#org10f94bf">8. IRR Desicion Rule</a></li>
-<li><a href="#orge30e19c">9. </a></li>
-<li><a href="#orgecd5a15">10. Choosing Between Projects</a></li>
-<li><a href="#org7a4d1a8">11. </a></li>
-<li><a href="#orgc41edc1">12. Calculator</a></li>
-<li><a href="#org5b49f60">13. Self-Quiz Questions</a></li>
-<li><a href="#orgcfe19a4">14. Reading Ease Score</a></li>
+<li><a href="#orge7dbcce">1. Businesses Make Binary Decisions</a></li>
+<li><a href="#orgd9432d3">2. Maximize Shareholder Wealth</a></li>
+<li><a href="#orgff7d727">3. Net Present Value (NPV)</a></li>
+<li><a href="#org58938e5">4. NPV Desicion Rule</a></li>
+<li><a href="#org6e4e48f">5. The Discount Rate</a></li>
+<li><a href="#org070d412">6. </a></li>
+<li><a href="#org4f9d5cf">7. Internal Rate of Return (IRR)</a></li>
+<li><a href="#orgbddc170">8. IRR Desicion Rule</a></li>
+<li><a href="#org57a09d3">9. </a></li>
+<li><a href="#org01adb30">10. Choosing Between Projects</a></li>
+<li><a href="#org9548767">11. </a></li>
+<li><a href="#org9aa1afa">12. Calculator</a></li>
+<li><a href="#org950277f">13. Self-Quiz Questions</a></li>
+<li><a href="#orga0fb22d">14. Reading Ease Score</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org760e4b1" class="outline-2">
-<h2 id="org760e4b1"><span class="section-number-2">1.</span> Businesses Make Binary Decisions</h2>
+<div id="outline-container-orge7dbcce" class="outline-2">
+<h2 id="orge7dbcce"><span class="section-number-2">1.</span> Businesses Make Binary Decisions</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-&lt;center&gt;**Invest or Do Not Invest**&lt;/center&gt;
-&lt;br&gt;
-&lt;center&gt;![](./binary.jpg)&lt;/center&gt;
-&lt;br&gt;
-&lt;center&gt;**So we need binary decision rules.**&lt;/center&gt;
-&lt;br&gt;
-&lt;br&gt;
+<center><b>Invest or Do Not Invest</b></center>
+<br>
+<center><iframe src="./binary.jpg"></iframe></center>
+<br>
+<center><b>So we need binary decision rules.</b></center>
+<br>
+<br>
 This presentation will provide an introduction to the two most important, Net Present Value (NPV) and Internal Rate of Return (IRR).
-</p>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-orgd90018b" class="outline-2">
-<h2 id="orgd90018b"><span class="section-number-2">2.</span> Maximize Shareholder Wealth</h2>
+<div id="outline-container-orgd9432d3" class="outline-2">
+<h2 id="orgd9432d3"><span class="section-number-2">2.</span> Maximize Shareholder Wealth</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Early in your study of corporate finance you should have learned the <b><b>Goal of Financial Management</b></b> above.  Clearly any decision rules we define must be consistent with this goal.
@@ -275,22 +269,17 @@ Early in your study of corporate finance you should have learned the <b><b>Goal 
 
 <ul class="org-ul">
 <li>NPV will be the change in the value of the firm's equity if the project is accepted.</li>
-
 <li>IRR will also generate accept decisions only if doing so increases the firm's equity.</li>
 </ul>
 
 <p>
 Thus accepting all projects which have NPV &gt; 0 will maximize shareholder wealth.
 </p>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-org754a8fd" class="outline-2">
-<h2 id="org754a8fd"><span class="section-number-2">3.</span> Net Present Value (NPV)</h2>
+<div id="outline-container-orgff7d727" class="outline-2">
+<h2 id="orgff7d727"><span class="section-number-2">3.</span> Net Present Value (NPV)</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <b>Net Present Value</b> is the sum of the investment's expected cash inflows and outflows discounted back to their present value at a risk adjusted rate. 
@@ -314,15 +303,13 @@ where:
 <li>\(C\), the expected <b><b>incremental</b></b> cash flows per period</li>
 <li>\(C_0\), the initial investment</li>
 </ul>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt;
-</p>
 </div>
 </div>
 
-<div id="outline-container-org01bc144" class="outline-2">
-<h2 id="org01bc144"><span class="section-number-2">4.</span> NPV Desicion Rule</h2>
+
+
+<div id="outline-container-org58938e5" class="outline-2">
+<h2 id="org58938e5"><span class="section-number-2">4.</span> NPV Desicion Rule</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 &lt;br&gt;
@@ -338,8 +325,8 @@ $NPV &lt; \\(0 \Rightarrow \text{Reject}\)&lt;/center&gt;
 </div>
 </div>
 
-<div id="outline-container-org4ae4be4" class="outline-2">
-<h2 id="org4ae4be4"><span class="section-number-2">5.</span> The Discount Rate</h2>
+<div id="outline-container-org6e4e48f" class="outline-2">
+<h2 id="org6e4e48f"><span class="section-number-2">5.</span> The Discount Rate</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The discount rate is the rate required on other projects of similar risk.  You can think of it as an <b>opportunity cost</b>, because if the firm didn't use the funds for the project, then it could be paid as a dividend to shareholders.  Shareholders then can invest the money in a financial asset earning that assets required return.
@@ -350,15 +337,13 @@ The discount rate is the rate required on other projects of similar risk.  You c
 
 <li>It is incorrect to use the firm's cost of borrowing, for a couple reasons.  First the investment decision should be independent of the capital structure decision.  Also, by increasing borrowing, you increase your cost of equity capital [Modigliani and Miller, Proposition II](<a href="https://micfm.shinyapps.io/MM_propositions_mobile/">https://micfm.shinyapps.io/MM_propositions_mobile/</a>). So debt only <b>appears</b> cheap.</li>
 </ul>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt;
-</p>
 </div>
 </div>
 
-<div id="outline-container-org792bc1a" class="outline-2">
-<h2 id="org792bc1a"><span class="section-number-2">6.</span> </h2>
+
+
+<div id="outline-container-org070d412" class="outline-2">
+<h2 id="org070d412"><span class="section-number-2">6.</span> </h2>
 <div class="outline-text-2" id="text-6">
 <p>
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -384,16 +369,14 @@ sidebarLayout(
 #}}}
 ```
 </p>
-
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-org590a044" class="outline-2">
-<h2 id="org590a044"><span class="section-number-2">7.</span> Internal Rate of Return (IRR)</h2>
+
+
+
+<div id="outline-container-org4f9d5cf" class="outline-2">
+<h2 id="org4f9d5cf"><span class="section-number-2">7.</span> Internal Rate of Return (IRR)</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 <b>Internal Rate of Return</b> is the discount rate (\(r_{IRR}\)) that makes the Net Present Value equal zero.  That is, we solve the following equation for the \(IRR\), using an algorithm such as the [Newton-Raphson method](<a href="https://en.wikipedia.org/wiki/Newton%27s_method">https://en.wikipedia.org/wiki/Newton%27s_method</a>).
@@ -405,15 +388,13 @@ sidebarLayout(
 <p>
 Note while NPV will have a unique solution, IRR may have multiple solutions depending on the signs of the cash flows.  The interested reader can understand why by consulting the [Fundamental Theorem of Algebra](<a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra">https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra</a>), [Descartes' Rule of Signs](<a href="https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs">https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs</a>), and [Sturm's Theorem](<a href="https://en.wikipedia.org/wiki/Sturm%27s_theorem">https://en.wikipedia.org/wiki/Sturm%27s_theorem</a>).
 </p>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-org10f94bf" class="outline-2">
-<h2 id="org10f94bf"><span class="section-number-2">8.</span> IRR Desicion Rule</h2>
+
+
+<div id="outline-container-orgbddc170" class="outline-2">
+<h2 id="orgbddc170"><span class="section-number-2">8.</span> IRR Desicion Rule</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 &lt;br&gt;
@@ -426,16 +407,14 @@ Note while NPV will have a unique solution, IRR may have multiple solutions depe
 &lt;br&gt;
 \(IRR < \text{Discount Rate} \Rightarrow \text{Reject}\)&lt;/center&gt;
 </p>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
 
-<div id="outline-container-orge30e19c" class="outline-2">
-<h2 id="orge30e19c"><span class="section-number-2">9.</span> </h2>
+
+
+<div id="outline-container-org57a09d3" class="outline-2">
+<h2 id="org57a09d3"><span class="section-number-2">9.</span> </h2>
 <div class="outline-text-2" id="text-9">
 <p>
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -463,15 +442,13 @@ renderPlot({
 <p>
 &lt;!&#x2013; use code from here to make a version of app which will read data from file:  <a href="http://stackoverflow.com/questions/29253481/data-specific-selectinput-choices-in-rmd-shiny/29255723#29255723">http://stackoverflow.com/questions/29253481/data-specific-selectinput-choices-in-rmd-shiny/29255723#29255723</a> &#x2013;&gt;
 </p>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-orgecd5a15" class="outline-2">
-<h2 id="orgecd5a15"><span class="section-number-2">10.</span> Choosing Between Projects</h2>
+
+
+<div id="outline-container-org01adb30" class="outline-2">
+<h2 id="org01adb30"><span class="section-number-2">10.</span> Choosing Between Projects</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 When the accept/reject decision on one project does not affect another project, these projects are known as <b><b>independent</b></b>.  If accepting one project means you must reject another, then these projects are <b><b>mutually exclusive</b></b>. 
@@ -486,15 +463,13 @@ If a project has negative cash flows followed by all positive cash flows, then t
 
 <li>However, if you must rank projects &#x2013; and projects are either mutually exclusive or cash flows are not conventional &#x2013; then use NPV.  NPV will generate the correct decision, though IRR may not.</li>
 </ul>
-
-<p>
-&lt;div class="MIfooter"&gt;&lt;img src="mi.png" style="height:50px;"&gt;&lt;/div&gt; 
-</p>
 </div>
 </div>
 
-<div id="outline-container-org7a4d1a8" class="outline-2">
-<h2 id="org7a4d1a8"><span class="section-number-2">11.</span> </h2>
+
+
+<div id="outline-container-org9548767" class="outline-2">
+<h2 id="org9548767"><span class="section-number-2">11.</span> </h2>
 <div class="outline-text-2" id="text-11">
 <p>
 &lt;!&#x2013; interactive app showing NVP for all discount rates and therefore IRR when crossing the x-axis &#x2013;&gt;
@@ -574,8 +549,8 @@ h2
 
 
 
-<div id="outline-container-orgc41edc1" class="outline-2">
-<h2 id="orgc41edc1"><span class="section-number-2">12.</span> Calculator</h2>
+<div id="outline-container-org9aa1afa" class="outline-2">
+<h2 id="org9aa1afa"><span class="section-number-2">12.</span> Calculator</h2>
 <div class="outline-text-2" id="text-12">
 
 <script>
@@ -636,8 +611,8 @@ var calculate = function() {
 
 
 
-<div id="outline-container-org5b49f60" class="outline-2">
-<h2 id="org5b49f60"><span class="section-number-2">13.</span> Self-Quiz Questions</h2>
+<div id="outline-container-org950277f" class="outline-2">
+<h2 id="org950277f"><span class="section-number-2">13.</span> Self-Quiz Questions</h2>
 <div class="outline-text-2" id="text-13">
 <script>
 var submitAnswer1 = function() {
@@ -762,25 +737,25 @@ document.getElementById("p3").style.backgroundColor = "#ff6666";
 </div>
 </div>
 
-<div id="outline-container-orgcfe19a4" class="outline-2">
-<h2 id="orgcfe19a4"><span class="section-number-2">14.</span> <a href="https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests">Reading Ease Score</a></h2>
+<div id="outline-container-orga0fb22d" class="outline-2">
+<h2 id="orga0fb22d"><span class="section-number-2">14.</span> <a href="https://en.wikipedia.org/wiki/Flesch%25E2%2580%2593Kincaid_readability_tests">Reading Ease Score</a></h2>
 <div class="outline-text-2" id="text-14">
 <pre class="example">
 
-"Flesch-Kincaid reading ease score: 89.83 Easy (6th grade)"
+"Flesch-Kincaid reading ease score: 88.47 Easy (6th grade)"
 </pre>
 
 
 <pre class="example">
 
-"Flesch-Kincaid grade level score: 2.85"
+"Flesch-Kincaid grade level score: 3.04"
 </pre>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Matt Brigida, Ph.D.</p>
-<p class="date">Created: 2022-04-19 Tue 20:48</p>
+<p class="date">Created: 2022-04-19 Tue 21:08</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

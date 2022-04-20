@@ -4,28 +4,25 @@
 
 * Businesses Make Binary Decisions
 
-<center>**Invest or Do Not Invest**</center>
+#+begin_export html
+<center><b>Invest or Do Not Invest</b></center>
 <br>
-<center>![](./binary.jpg)</center>
+<center><iframe src="./binary.jpg"></iframe></center>
 <br>
-<center>**So we need binary decision rules.**</center>
+<center><b>So we need binary decision rules.</b></center>
 <br>
 <br>
 This presentation will provide an introduction to the two most important, Net Present Value (NPV) and Internal Rate of Return (IRR).
-
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+#+end_export
 
 * Maximize Shareholder Wealth
 
 Early in your study of corporate finance you should have learned the **Goal of Financial Management** above.  Clearly any decision rules we define must be consistent with this goal.
 
--  NPV will be the change in the value of the firm's equity if the project is accepted.
-
--  IRR will also generate accept decisions only if doing so increases the firm's equity.
+- NPV will be the change in the value of the firm's equity if the project is accepted.
+- IRR will also generate accept decisions only if doing so increases the firm's equity.
 
 Thus accepting all projects which have NPV > 0 will maximize shareholder wealth.
-
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
 
 * Net Present Value (NPV)
 
@@ -42,7 +39,7 @@ where:
 - $C$, the expected **incremental** cash flows per period
 - $C_0$, the initial investment
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div>
+
 
 * NPV Desicion Rule
 <br>
@@ -63,7 +60,7 @@ The discount rate is the rate required on other projects of similar risk.  You c
 
 -  It is incorrect to use the firm's cost of borrowing, for a couple reasons.  First the investment decision should be independent of the capital structure decision.  Also, by increasing borrowing, you increase your cost of equity capital [Modigliani and Miller, Proposition II](https://micfm.shinyapps.io/MM_propositions_mobile/). So debt only *appears* cheap.
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div>
+
 
 * 
 
@@ -91,7 +88,7 @@ sidebarLayout(
 ```
 
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+ 
 
 * Internal Rate of Return (IRR)
 
@@ -102,7 +99,7 @@ $-C_0 + \frac{C_1}{(1+r_{IRR})^1} + \frac{C_2}{(1+r_{IRR})^2} + ... + \frac{C_n}
 
 Note while NPV will have a unique solution, IRR may have multiple solutions depending on the signs of the cash flows.  The interested reader can understand why by consulting the [Fundamental Theorem of Algebra](https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra), [Descartes' Rule of Signs](https://en.wikipedia.org/wiki/Descartes%27_rule_of_signs), and [Sturm's Theorem](https://en.wikipedia.org/wiki/Sturm%27s_theorem).
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+ 
 
 * IRR Desicion Rule
 <br>
@@ -115,7 +112,7 @@ Note while NPV will have a unique solution, IRR may have multiple solutions depe
 <br>
 $IRR < \text{Discount Rate} \Rightarrow \text{Reject}$</center>
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+ 
 
 
 * 
@@ -141,7 +138,7 @@ renderPlot({
 
 <!-- use code from here to make a version of app which will read data from file:  http://stackoverflow.com/questions/29253481/data-specific-selectinput-choices-in-rmd-shiny/29255723#29255723 -->
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+ 
 
 * Choosing Between Projects
 
@@ -153,7 +150,7 @@ If a project has negative cash flows followed by all positive cash flows, then t
 
 -  However, if you must rank projects -- and projects are either mutually exclusive or cash flows are not conventional -- then use NPV.  NPV will generate the correct decision, though IRR may not.
 
-<div class="MIfooter"><img src="mi.png" style="height:50px;"></div> 
+ 
 
 * 
 
